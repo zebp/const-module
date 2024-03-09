@@ -11,9 +11,8 @@
   "module": "./dist/index.js",
   "scripts": {
     "build": "tsc",
-    "lint": "biome lint ./src ./test",
     "format": "biome format ./src ./test --write",
-    "check:lint": "biome format ./src ./test",
+    "check:lint": "biome lint ./src ./test",
     "check:format": "biome format ./src ./test",
     "test": "vitest"
   },
