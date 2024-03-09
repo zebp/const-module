@@ -18,7 +18,7 @@
 
 ## Usage
 
-You _probably_ don't want to use this package on your own, instead use either the downstream [`const-loader`](https://github.com/zebp/const-loader) or [`vite-plugin-const`](https://github.com/zebp/vite-plugin-const).
+You _probably_ don't want to use this package on your own, instead use either the downstream [`const-module-loader`](https://github.com/zebp/const-module-loader) or [`vite-plugin-const`](https://github.com/zebp/vite-plugin-const).
 
 ## License
 
