@@ -3,6 +3,7 @@
   "version": "0.1.0",
   "description": "A package for compile time evaluation of ESM modules.",
   "author": "Zeb Piasecki <zeb@zebulon.dev>",
+  "repository": "https://github.com/zebp/const-module",
   "type": "module",
   "exports": {
     ".": "./dist/index.js"
