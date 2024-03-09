@@ -1,14 +1,12 @@
 {
   "name": "const-module",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "A package for compile time evaluation of ESM modules.",
   "author": "Zeb Piasecki <zeb@zebulon.dev>",
   "repository": "https://github.com/zebp/const-module",
   "type": "module",
-  "exports": {
-    ".": "./dist/index.js"
-  },
-  "module": "./dist/index.js",
+  "main": "dist/index.js",
+  "module": "dist/index.js",
   "scripts": {
     "build": "tsc",
     "format": "biome format ./src ./test --write",
