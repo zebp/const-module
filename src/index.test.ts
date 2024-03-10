@@ -1,10 +1,14 @@
-import { describe, it, expect } from "vitest";
+import { describe, expect } from "vitest";
 import { asConst } from "./index.js";
+import { newTmpFile, tmpdirTest } from "../test/util.js";
 
 describe("asConst", () => {
-  it("should constify JS without the transform option", async () => {
-    const output = await asConst("export const foo = 1;", { transform: false });
-    expect(output).toMatchInlineSnapshot(`
+  tmpdirTest(
+    "should constify JS without the transform option",
+    async ({ tmpdir }) => {
+      const filename = await newTmpFile(tmpdir, "export const foo = 1;");
+      const output = await asConst(filename);
+      expect(output).toMatchInlineSnapshot(`
 			"function deserialize(value) {
 			  switch (value.__const_type) {
 			    case "Date":
@@ -47,14 +51,19 @@ describe("asConst", () => {
 			export const foo = __module.foo;
 			"
 		`);
-  });
+    },
+  );
 
-  it("should constify TS with the transform option", async () => {
-    const output = await asConst("export const foo: number = 1 as number;", {
-      transform: true,
-    });
+  tmpdirTest(
+    "should constify TS with the transform option",
+    async ({ tmpdir }) => {
+      const filename = await newTmpFile(
+        tmpdir,
+        "export const foo: number = 1 as number;",
+      );
+      const output = await asConst(filename);
 
-    expect(output).toMatchInlineSnapshot(`
+      expect(output).toMatchInlineSnapshot(`
 			"function deserialize(value) {
 			  switch (value.__const_type) {
 			    case "Date":
@@ -97,19 +106,13 @@ describe("asConst", () => {
 			export const foo = __module.foo;
 			"
 		`);
-  });
+    },
+  );
 
   describe("errors", () => {
-    it("should throw if the input is invalid", async () => {
-      await expect(asConst("diahkldgwuiad")).rejects.toThrow();
-    });
-
-    it("should throw input is TS without transform", async () => {
-      await expect(
-        asConst("export const foo: number = 1;", {
-          transform: false,
-        }),
-      ).rejects.toThrow();
+    tmpdirTest("should throw if the input is invalid", async ({ tmpdir }) => {
+      const filename = await newTmpFile(tmpdir, "diahkldgwuiad");
+      await expect(asConst(filename)).rejects.toThrow();
     });
   });
 });

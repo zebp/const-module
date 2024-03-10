@@ -25,7 +25,7 @@ export const tmpdirTest = test.extend<TmpDirFixture>({
 });
 
 export async function newTmpFile(tmpdir: string, content: string) {
-  const filename = path.join(tmpdir, "file.mjs");
+  const filename = path.join(tmpdir, "file.mts");
   await fs.writeFile(filename, content);
   return filename;
 }

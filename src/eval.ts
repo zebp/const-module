@@ -21,9 +21,11 @@ const runnerPath = () => {
 };
 
 export async function evaluate(path: string): Promise<string> {
-  const child = childProcess.exec(`node ${runnerPath()} ${path}`, {
+  const tsxPath = "node_modules/.bin/tsx";
+  const child = childProcess.exec(`${tsxPath} ${runnerPath()} ${path}`, {
     env: {
       ...process.env,
+      NODE_OPTIONS: "--import tsx/esm",
     },
     maxBuffer: 1024 * 1024 * 1024,
   });
