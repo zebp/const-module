@@ -9,7 +9,7 @@
     <img src="https://img.shields.io/npm/v/const-module?style=for-the-badge" alt="downloads" height="24">
   </a>
   <a href="https://www.npmjs.com/package/const-module">
-    <img src="https://img.shields.io/github/actions/workflow/status/zebp/const-module/ci.yml?branch=main&style=for-the-badge" alt="npm version" height="24">
+    <img src="https://img.shields.io/github/actions/workflow/status/zebp/const-module/ci.yaml?branch=main&style=for-the-badge" alt="npm version" height="24">
   </a>
   <a href="https://github.com/zebp/streaming-tar">
     <img src="https://img.shields.io/badge/license-MIT-green?style=for-the-badge" alt="MIT license" height="24">
