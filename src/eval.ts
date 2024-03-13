@@ -4,31 +4,29 @@ import * as path from "node:path";
 import * as fs from "node:fs";
 import { deserialize } from "./conversion.js";
 
-const runnerPath = () => {
+function js(name: string) {
   try {
     // @ts-ignore
     const __dirname = url.fileURLToPath(new URL(".", import.meta.url));
-    const entryJs = path.resolve(__dirname, "entry.js");
+    const entryJs = path.resolve(__dirname, name);
     if (fs.existsSync(entryJs)) {
       return entryJs;
       // biome-ignore lint/style/noUselessElse: <explanation>
     } else {
-      return path.resolve(__dirname, "entry.js");
+      return path.resolve(__dirname, name);
     }
   } catch (_) {
-    return "node_modules/const-module/dist/entry.js";
+    return `node_modules/const-module/dist/${name}`;
   }
-};
+}
 
 export async function evaluate(path: string): Promise<string> {
-  const tsxPath = "node_modules/.bin/tsx";
-  const child = childProcess.exec(`${tsxPath} ${runnerPath()} ${path}`, {
-    env: {
-      ...process.env,
-      NODE_OPTIONS: "--import tsx/esm",
+  const child = childProcess.exec(
+    `node ${js("tsx-cli.js")} ${js("entry.js")} ${path}`,
+    {
+      maxBuffer: 1024 * 1024 * 1024,
     },
-    maxBuffer: 1024 * 1024 * 1024,
-  });
+  );
 
   let stdout = "";
   let stderr = "";
