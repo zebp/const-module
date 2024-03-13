@@ -1,6 +1,6 @@
 {
   "name": "const-module",
-  "version": "0.2.0",
+  "version": "0.2.1",
   "description": "A package for compile time evaluation of ESM modules.",
   "author": "Zeb Piasecki <zeb@zebulon.dev>",
   "repository": "https://github.com/zebp/const-module",
