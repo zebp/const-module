@@ -10,7 +10,12 @@ async function main() {
 
     if (!modulePath) throw new Error("No module path provided.");
 
-    const absoluteModulePath = path.resolve(modulePath);
+    let absoluteModulePath = path.resolve(modulePath);
+
+    if (process.platform === "win32" && path.isAbsolute(modulePath)) {
+      absoluteModulePath = `file:///${absoluteModulePath.replace(/\\/g, "/")}`;
+    }
+
     const mod = await import(absoluteModulePath);
 
     const convertedModule = convertToSerializableTypes({ ...mod });
